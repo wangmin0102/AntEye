@@ -1,0 +1,131 @@
+1.10:
+	* REQUIRE PYTHON >= 3.6.2
+	* New style HTML page for HTML logger
+	* Track availability percentage, and include in HTML
+	* Add Arlo battery monitor
+	* Add Amazon SNS alerter
+	* Add only_failures option to alerters
+	* Add failure_doc property to monitors, to allow linking to e.g. runbooks
+	* Use psutil library to monitor Windows Services; fixes issue where non-English localisations broke
+	* Add memory and swap monitors
+	* Add group support to loggers
+	* Add unix_service monitor, for generic cross-flavour service checking (if "service X status" works, you can use this)
+	* Add process monitor, to check a process(es) are running
+	* Add option to bind network listener to a specific IP
+	* Add new ping monitor, which uses a Python library to ping hosts. Fixes issues from trying to parse ping(8) output (e.g. localisations), but requires root to work
+	* Add username/password options for MQTT logger
+	* Improve timezone handling; everything is done in UTC internally and you can specify the timezone to use for alerters and loggers
+	* Improve handling of exceptions thrown but not handled by monitors
+	* Improve handling of monitors which went away (or were renamed) on remote hosts
+	* Improve reporting of SSL errors in HTTP monitor
+	* Unified alert message generator across all Alerters
+	* Many code improvements and refactoring to support new features in the future
+1.9:
+	* REQUIRE PYTHON >= 3.5
+	* Switch to distribution as a pip package! You can now "pip install AntEye"
+	* Add memory monitor
+	* Add Ring doorbell monitor (checks battery level)
+	* Add support for checking file is not too large
+	* Add support for running a command when a monitor recovers
+	* Add support for reloading config on the fly
+	* Fixes to compound monitor logic
+	* HTTP monitor can check both return code and regexp now
+	* Update pkgaudit monitor to chase new output format
+	* DNS monitor can check response is NXDOMAIN
+	* Many code quality improvements (I hope)
+
+1.8:
+	* REMOVED SUPPORT FOR Python 2.6
+	* LAST RELEASE TO SUPPORT 2.7
+	* CHANGED REMOTE MONITOR PROTOCOL (security fix)
+	* Support Python 3
+	* Add JSON logger
+	* Add 46elks SMS alerter
+	* Add PushBullet alerter
+	* Add Telegram alerter
+	* Add Notification Center alerter (for macOS)
+	* Add systemd unit monitor
+	* Add Home Automation monitor
+	* Add MQTT logger
+	* Improve Slack alerter's configurability
+	* Add basic HTTP Auth and timeouts to HTTP monitor
+	* Verify SSL certificates by defaults
+	* Add notification groups
+	* Add support for environment variables in config values and section names
+	* Add tests
+	* Add sample docker configurations
+	* Use Pipenv for requirements management
+	* Added example startup scripts including a Windows Service
+	* Improved logging output (to stdout, not the Logger class)
+	* IPv6 support for network Logger
+	* DB Loggers now auto-create the database/table as needed, and can update schema version
+	* Email Logger now supports multiple addresses
+	* DNS Monitor now supports multivalue responses
+	* Use JSON format for remote monitor protocol; more secure than pickle
+1.7:
+	+ Add Slack alerter
+	+ Add Command monitor
+	+ Add pkg audit monitor
+	+ Add SSL client auth
+	+ Add Amazon SES alerter
+	+ Add a sample upstart script
+	+ Add support for Pushover
+	+ Add support for alerters to repeat
+	+ Support username/password and SSL support for SMTP
+	* Use subprocess everywhere
+	* Honour SMTP port in configuration
+	* Honour gap configuration option
+	* Use HTTPS for BulkSMS API
+	* Date format for logfile is configurable
+	* Use UTC everywhere for times; should fix monitors which have been down -1 hours
+	* Teach the host (ping) monitor to use command line options better on
+	  different operating systems
+	* Verify dependencies exist
+	* Stop alerters from firing success notifications out-of-hours
+
+1.6:
+	* Added DNS monitor
+	* Added Execute logger
+
+1.4:
+	* Fixed a problem where success alerts were always sent
+	* Many other small fixes
+
+	+ Added remote monitor/central reporting support
+	+ Added support for monitor defaults
+	+ Added HTML logger type to generate a status webpage
+	+ Added syslog alerter
+
+1.3:
+	+ Added -p option to write a pidfile
+	+ Added support for a HUP signal to close/reopen logfiles
+
+1.2:
+	* Refactored monitor/logger/alerter registration code
+	  These objects are now more self-loading and just need to be
+		passed a dict of their config options.
+	* Changed to using packages for monitors, loggers and alerters.
+	* Fixed bug where initial failure time was always the most recent
+	  failure time.
+	* Fixed a bug with the DiskSpace monitor which meant the free space
+	  on non-Windows platforms was incorrectly calculated.
+	* Changed the intention of the DiskSpace monitior on non-Windows
+	  platforms to measure the non-superuser free space.
+	* Fixed a bug which could mean the main loop ignored the interval
+	  if an error occurred during tests.
+	* Better support for the dry_run setting on alerters
+	* BulkSMS sender now limits messages to 160 chars (otherwise BulkSMS
+	  rejects them).
+	* Formatted times in alerts to not include microseconds
+
+	+ Monitors now know their own name
+	+ Alerters now have configurable time ranges for operation.
+	+ Alerters now have days of operation.
+	+ Alerters can hold alerts that occur out-of-hours and update you
+	  if the monitor is still failed when they become in-hours.
+	+ Email alerts for failure now include downtime (which will be 0 for
+	  an alert that fires immediately, but may be useful for alerters with
+		a limit).
+
+<= 1.1:
+	* Changes not tracked.

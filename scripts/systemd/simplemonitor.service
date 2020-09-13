@@ -1,0 +1,11 @@
+[Unit]
+Description=monitoring service
+After=network.target
+
+[Service]
+WorkingDirectory=/root/AntEye
+ExecStart=/usr/bin/python3 /root/AntEye/monitor.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

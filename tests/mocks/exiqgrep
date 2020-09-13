@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+# mock exiqgrep for AntEye
+
+echo "100 matches out of 100 messages"

@@ -1,0 +1,5 @@
+---
+highlighter: rouge
+baseurl: /AntEye
+exclude:
+  - vendor
